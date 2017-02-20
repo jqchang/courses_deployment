@@ -1,0 +1,15 @@
+td {
+  vertical-align: top;
+}
+
+td:nth-child(1) {
+  font-weight: bold;
+}
+
+.content {
+  width: 300px;
+}
+
+ul {
+  color: red;
+}

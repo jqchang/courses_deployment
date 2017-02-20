@@ -1,0 +1,29 @@
+.delete {
+  background-color: red;
+  color: white;
+}
+
+.courselist {
+  border-collapse: collapse;
+}
+
+.courselist th, .courselist td {
+  vertical-align: top;
+  border: 1px black solid;
+}
+
+th {
+  background-color: #DDDDDD;
+}
+
+.courselist tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+
+form {
+  display: inline;
+}
+
+ul {
+  color: red;
+}

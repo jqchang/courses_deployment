@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Course Comments</title>
+    {%load staticfiles%}
+    <link rel="stylesheet" type="text/css" href={%static "course/css/comment.css"%}>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="{%static 'course/js/comment.js'%}"></script>
+  </head>
+  <body>
+    {%if messages%}
+    <ul>
+      {%for msg in messages%}
+      <li>{{msg}}</li>
+      {%endfor%}
+    </ul>
+    {%endif%}
+    <h1>Course: {{target.name}}</h1>
+    <h3>Description:</h3>
+    <p>{{target.description}}</p>
+    <h3>Comments:</h3>
+    <table>
+      <tbody>
+        <!-- for loop here to display comments where course_id=target.id -->
+        {%for comment in comments%}
+        <tr>
+          <td>{{comment.name}} said:</td>
+          <td class='content'>{{comment.content}}</td>
+          <td>{{comment.created_at}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><form action='/comments/delete/{{comment.id}}' class="{{comment.id}}" method='post'>{%csrf_token%}<button class="{{comment.id}}" active="false">Delete</button></form></td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    <h3>Add a comment:</h3>
+    <table>
+      <tbody>
+        <form action='/comments/add/{{target.id}}' method='post'>
+          {%csrf_token%}
+          <tr>
+            <td>Name (optional):</td>
+            <td><input type='text' id='comment_name' name='name'></td>
+          </tr>
+          <tr>
+            <td>Password (for deletion):</td>
+            <td><input type='password' id='comment_password' name='password'></td>
+          </tr>
+          <tr>
+            <td>Comment:</td>
+            <td><textarea name='content' rows=6 cols=30></textarea></td>
+          </tr>
+          <tr>
+            <td><input type='submit' value="Comment"></td>
+            <td></td>
+          </tr>
+        </form>
+      </tbody>
+    </table>
+    <a href='/'>Go Back</a>
+  </body>
+</html>
