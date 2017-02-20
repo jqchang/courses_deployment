@@ -44,7 +44,7 @@
         <tr>
         <td>{{course.name}}</td>
         <td>{{course.description}}</td>
-        <td>{{course.localtime}}</td>
+        <td>{%load tz%}{%localtime on%}{{course.created_at}}{%endlocaltime%}</td>
         <td><a href='/delete/{{course.id}}'>remove</a> <a href='/comments/{{course.id}}'>comment</a></td>
         </tr>
         {%endfor%}

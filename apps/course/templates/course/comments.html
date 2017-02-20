@@ -29,7 +29,7 @@
         <tr>
           <td>{{comment.name}} said:</td>
           <td class='content'>{{comment.content}}</td>
-          <td>{{comment.localtime}}</td>
+          <td>{%load tz%}{%localtime on%}{{comment.created_at}}{%endlocaltime%}</td>
         </tr>
         <tr>
           <td></td>

@@ -4,18 +4,10 @@ from .models import Course, Comment
 import calendar
 from datetime import datetime, timedelta
 
-def utc_to_local(utc_dt):
-    # get integer timestamp to avoid precision lost
-    timestamp = calendar.timegm(utc_dt.timetuple())
-    local_dt = datetime.fromtimestamp(timestamp)
-    assert utc_dt.resolution >= timedelta(microseconds=1)
-    return local_dt.replace(microsecond=utc_dt.microsecond)
 
 # Create your views here.
 def index(request):
     courses = Course.objects.all()
-    for course in courses:
-        course.localtime = utc_to_local(course.created_at)
     return render(request, 'course/index.html', {"courses":courses})
 
 def submit(request):
@@ -44,14 +36,11 @@ def destroy(request, id):
 def comments(request, id):
     try:
         target = Course.objects.get(id=id)
-        target.localtime = utc_to_local(target.created_at)
     except Course.DoesNotExist:
         messages.add_message(request, messages.INFO, "Course not found!")
         return redirect('/')
     try:
         comments = Comment.objects.filter(course=id)
-        for comment in comments:
-            comment.localtime = utc_to_local(comment.created_at)
     except Comment.DoesNotExist:
         comments = []
     return render(request, 'course/comments.html', {"target":target, "comments":comments})
