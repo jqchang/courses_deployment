@@ -17,6 +17,8 @@
     </ul>
     {%endif%}
     <h1>Course: {{target.name}}</h1>
+    <h3>Added on:</h3>
+    <p>{{target.localtime}}</p>
     <h3>Description:</h3>
     <p>{{target.description}}</p>
     <h3>Comments:</h3>
@@ -27,7 +29,7 @@
         <tr>
           <td>{{comment.name}} said:</td>
           <td class='content'>{{comment.content}}</td>
-          <td>{{comment.created_at}}</td>
+          <td>{{comment.localtime}}</td>
         </tr>
         <tr>
           <td></td>
